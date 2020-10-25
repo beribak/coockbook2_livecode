@@ -15,10 +15,15 @@ class Controller
   end
 
   def import
+    # 1. Ask user for dish for recipes
     dish = @view.ask_user_dish_name
+    # 2. Get recipes from allrecipes website
     results = ScraperRecipes.new(dish).call
+    # 3. Display recipes choices
     @view.display(results)
+    # 4. Ask user for desired recipe
     index = @view.ask_user_for_index
+    # 5. Store recipe in cookbook
     @cookbook.add_recipe(results[index])
   end
 
